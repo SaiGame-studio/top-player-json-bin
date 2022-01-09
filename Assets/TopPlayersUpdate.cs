@@ -4,14 +4,10 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class TopPlayersScript : MonoBehaviour
+public class TopPlayersUpdate : MonoBehaviour
 {
-    public static TopPlayersScript instance;
+    public static TopPlayersUpdate instance;
     protected TopPlayerApiCall apiCall = new TopPlayerApiCall();
-
-    [SerializeField]
-    //public PlayerScores playerScores = new PlayerScores();
-    //public List<TextMeshProUGUI> textPlayerScores = new List<TextMeshProUGUI>();
     public GameObject apple;
     public string playerName = null;
     public TMP_InputField playerNameInput;
@@ -19,8 +15,8 @@ public class TopPlayersScript : MonoBehaviour
 
     private void Awake()
     {
-        if (TopPlayersScript.instance != null) Debug.LogError("TopPlayers Error");
-        TopPlayersScript.instance = this;
+        if (TopPlayersUpdate.instance != null) Debug.LogError("TopPlayers Error");
+        TopPlayersUpdate.instance = this;
     }
 
     public virtual void GetAndUpdateTopPlayers()
@@ -40,7 +36,7 @@ public class TopPlayersScript : MonoBehaviour
             return;
         }
 
-        this.ShowTopPlayers(jsonStringResponse);
+        UTTopPlayers.instance.ShowTopPlayers(jsonStringResponse);
         this.UpdateTopPlayers();
     }
 
@@ -66,7 +62,7 @@ public class TopPlayersScript : MonoBehaviour
             return;
         }
 
-        this.ShowTopPlayers(jsonStringResponse);
+        UTTopPlayers.instance.ShowTopPlayers(jsonStringResponse);
     }
 
     protected virtual PlayerScore CurrentPlayer()
@@ -79,42 +75,10 @@ public class TopPlayersScript : MonoBehaviour
         return playerScore;
     }
 
-    public virtual void GetTopPlayers()
-    {
-        StartCoroutine(this.apiCall.JsonGet(this.apiCall.Uri(), "{}", this.OnGetTopPlayersDone));
-    }
 
-    public virtual void OnGetTopPlayersDone(UnityWebRequest request, string jsonStringResponse)
-    {
-
-        UnityWebRequest.Result re = request.result;
-        if (re != UnityWebRequest.Result.Success)
-        {
-            //TODO: need more work here
-            Debug.LogWarning(jsonStringResponse);
-            return;
-        }
-
-        this.ShowTopPlayers(jsonStringResponse);
-    }
-
-    public virtual void ShowTopPlayers(string jsonStringResponse)
-    {
-        PlayerScoresRes playerScoresRes = PlayerScoresRes.FromJSON(jsonStringResponse);
-        TopPlayers.instance.playerScores = playerScoresRes.record;
-
-        int i = 0;
-        TextMeshProUGUI textMeshPro;
-        foreach (PlayerScore playerScore in TopPlayers.instance.playerScores.playerScores)
-        {
-            textMeshPro = UTTopPlayers.instance.textPlayerScores[i];
-
-            string text = playerScore.name + " - " + playerScore.score;
-            textMeshPro.text = text;
-            i++;
-        }
-    }
-
+    /// <summary>
+    /// Call from Button UI
+    /// </summary>
     public virtual void GetName()
     {
         this.playerName = this.playerNameInput.text;
