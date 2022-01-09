@@ -45,6 +45,7 @@ public class PlayerScores
         }
 
         string json = JsonConvert.SerializeObject(this.playerScores);
+        Debug.Log(json);
         this.newMd5 = this.MD5Hash(json);
     }
 

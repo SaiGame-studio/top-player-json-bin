@@ -23,9 +23,30 @@ public class TopPlayersScript : MonoBehaviour
         TopPlayersScript.instance = this;
     }
 
-    public virtual void UpdateTopPlayers(int currentScore)
+    public virtual void GetAndUpdateTopPlayers()
     {
-        this.playerScores.AddPlayer(this.CurrentPlayer(currentScore));
+        this.apiCall.isDebug = true;
+        StartCoroutine(this.apiCall.JsonGet(this.apiCall.Uri(), "{}", this.OnGet2UpdateDone));
+    }
+
+    public virtual void OnGet2UpdateDone(UnityWebRequest request, string jsonStringResponse)
+    {
+
+        UnityWebRequest.Result re = request.result;
+        if (re != UnityWebRequest.Result.Success)
+        {
+            //TODO: need more work here
+            Debug.LogWarning(jsonStringResponse);
+            return;
+        }
+
+        this.ShowTopPlayers(jsonStringResponse);
+        this.UpdateTopPlayers();
+    }
+
+    public virtual void UpdateTopPlayers()
+    {
+        this.playerScores.AddPlayer(this.CurrentPlayer());
         this.playerScores.TopUpdate();
 
         if (!this.playerScores.HasUpdate()) return;
@@ -48,12 +69,12 @@ public class TopPlayersScript : MonoBehaviour
         this.ShowTopPlayers(jsonStringResponse);
     }
 
-    protected virtual PlayerScore CurrentPlayer(int currentScore)
+    protected virtual PlayerScore CurrentPlayer()
     {
         PlayerScore playerScore = new PlayerScore
         {
             name = this.playerName,
-            score = currentScore,
+            score = ClickMe.instance.score,
         };
         return playerScore;
     }

@@ -3,8 +3,15 @@ using UnityEngine;
 
 public class ClickMe : MonoBehaviour
 {
+    public static ClickMe instance;
     public int score = 0;
     public TextMeshProUGUI text;
+
+    private void Awake()
+    {
+        if (ClickMe.instance != null) Debug.LogError("ClickMe Error");
+        ClickMe.instance = this;
+    }
 
     private void OnEnable()
     {
@@ -25,7 +32,10 @@ public class ClickMe : MonoBehaviour
         string text = TopPlayersScript.instance.playerName + ": " + this.score.ToString();
         this.text.text = text;
 
-        TopPlayersScript.instance.GetTopPlayers();
-        TopPlayersScript.instance.UpdateTopPlayers(this.score);
+        if (this.score % 10 != 0) return;
+
+        //TopPlayersScript.instance.GetTopPlayers();
+        //TopPlayersScript.instance.UpdateTopPlayers(this.score);
+        TopPlayersScript.instance.GetAndUpdateTopPlayers();
     }
 }
