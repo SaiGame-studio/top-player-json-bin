@@ -15,7 +15,7 @@ public class ClickMe : MonoBehaviour
 
     private void OnEnable()
     {
-        TopPlayersScript.instance.GetTopPlayers();
+        TopPlayersGet.instance.Get();
     }
 
     private void OnMouseDown()
@@ -29,13 +29,11 @@ public class ClickMe : MonoBehaviour
         transform.position = randomPositionOnScreen;
         this.score += 1;
 
-        string text = TopPlayersScript.instance.playerName + ": " + this.score.ToString();
+        string text = TopPlayersUpdate.instance.playerName + ": " + this.score.ToString();
         this.text.text = text;
 
         if (this.score % 10 != 0) return;
 
-        //TopPlayersScript.instance.GetTopPlayers();
-        //TopPlayersScript.instance.UpdateTopPlayers(this.score);
-        TopPlayersScript.instance.GetAndUpdateTopPlayers();
+        TopPlayersUpdate.instance.GetAndUpdateTopPlayers();
     }
 }
