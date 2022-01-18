@@ -8,6 +8,7 @@ namespace PlayFabDemo
     {
         public static GameManager instance;
         public GameObject apple;
+        public GameObject userInputs;
         public TextMeshProUGUI uiScore;
         [SerializeField] protected int score;
 
@@ -19,6 +20,7 @@ namespace PlayFabDemo
 
         public virtual void GameStart()
         {
+            this.userInputs.SetActive(false);
             this.apple.SetActive(true);
         }
 
