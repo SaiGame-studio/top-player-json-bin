@@ -13,7 +13,7 @@ namespace PlayFabDemo
 
         private void Awake()
         {
-            if (UITopPlayers.instance != null) Debug.LogError("UTTopPlayers Error");
+            if (UITopPlayers.instance != null) Debug.LogError("UITopPlayers Error");
             UITopPlayers.instance = this;
 
             this.LoadTexts();
