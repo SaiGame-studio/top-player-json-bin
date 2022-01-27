@@ -10,7 +10,8 @@ namespace PlayFabDemo
         public GameObject apple;
         public GameObject userInputs;
         public TextMeshProUGUI uiScore;
-        [SerializeField] protected int score;
+        public int score;
+        public int bestScore;
 
         private void Awake()
         {
@@ -27,11 +28,14 @@ namespace PlayFabDemo
             PlayFabLeaderBoard.instance.GetLeaderBoard();
         }
 
-        public virtual void ScoreAdd(int score)
+        public virtual void ScoreAdd(int addScore)
         {
-            this.score += score;
+            this.score += addScore;
             string text = this.score.ToString();
             this.uiScore.text = text;
+
+            if (this.score <= this.bestScore) return;
+            this.bestScore = this.score;
 
             PlayFabLeaderBoard.instance.UpdateScore(this.score);
         }

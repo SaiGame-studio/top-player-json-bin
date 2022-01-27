@@ -8,7 +8,6 @@ namespace PlayFabDemo
     public class PlayFabLeaderBoard : MonoBehaviour
     {
         public static PlayFabLeaderBoard instance;
-        public int bestScore = 0;
 
         private void Awake()
         {
@@ -29,7 +28,7 @@ namespace PlayFabDemo
 
         protected virtual void DisplayLeaderboard(GetLeaderboardResult result)
         {
-            UTTopPlayers.instance.ShowTopPlayers(result.Leaderboard);
+            UITopPlayers.instance.ShowTopPlayers(result.Leaderboard);
         }
 
 
@@ -43,17 +42,16 @@ namespace PlayFabDemo
         {
             StatisticValue score = result.Statistics.Find((x) => x.StatisticName == "score");
             if (score == null) return;
-            this.bestScore = score.Value;
+            GameManager.instance.bestScore = score.Value;
         }
 
         public virtual void UpdateScore(int newScore)
         {
-            if (newScore <= this.bestScore) return;
-            this.bestScore = newScore;
-
             UpdatePlayerStatisticsRequest request = new UpdatePlayerStatisticsRequest
             {
-                Statistics = new List<StatisticUpdate> { new StatisticUpdate { StatisticName = "score", Value = newScore } }
+                Statistics = new List<StatisticUpdate> {
+                    new StatisticUpdate { StatisticName = "score", Value = newScore }
+                }
             };
 
             PlayFabClientAPI.UpdatePlayerStatistics(request, this.UpdateScoreSuccess, this.RequestError);
@@ -62,7 +60,8 @@ namespace PlayFabDemo
         protected virtual void UpdateScoreSuccess(UpdatePlayerStatisticsResult result)
         {
             Debug.Log("UpdateScoreSuccess");
-            this.GetLeaderBoard();
+            //this.GetLeaderBoard();
+            Invoke("GetLeaderBoard", 2f);
         }
 
         protected virtual void RequestError(PlayFabError error)
