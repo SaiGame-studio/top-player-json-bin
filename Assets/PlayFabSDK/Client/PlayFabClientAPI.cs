@@ -2257,7 +2257,10 @@ namespace PlayFab
             PlayFabHttp.MakeApiCall("/Client/WriteTitleEvent", request, AuthType.LoginSession, resultCallback, errorCallback, customData, extraHeaders, context, callSettings);
         }
 
-
+        public static void GetLeaderboard(GetLeaderboardRequest getLeaderboardRequest, Action<UpdatePlayerStatisticsResult> displayLeaderboard, Action<PlayFabError> requestError)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

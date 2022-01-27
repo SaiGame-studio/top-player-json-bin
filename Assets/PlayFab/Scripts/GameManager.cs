@@ -22,6 +22,9 @@ namespace PlayFabDemo
         {
             this.userInputs.SetActive(false);
             this.apple.SetActive(true);
+
+            PlayFabLeaderBoard.instance.GetScore();
+            PlayFabLeaderBoard.instance.GetLeaderBoard();
         }
 
         public virtual void ScoreAdd(int score)
@@ -29,6 +32,8 @@ namespace PlayFabDemo
             this.score += score;
             string text = this.score.ToString();
             this.uiScore.text = text;
+
+            PlayFabLeaderBoard.instance.UpdateScore(this.score);
         }
     }
 
