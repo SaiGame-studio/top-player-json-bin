@@ -8,6 +8,7 @@ namespace PlayFabDemo
     public class PlayFabLeaderBoard : MonoBehaviour
     {
         public static PlayFabLeaderBoard instance;
+        public List<PlayerLeaderboardEntry> leaderboard = new List<PlayerLeaderboardEntry>();
 
         private void Awake()
         {
@@ -28,7 +29,17 @@ namespace PlayFabDemo
 
         protected virtual void DisplayLeaderboard(GetLeaderboardResult result)
         {
-            UITopPlayers.instance.ShowTopPlayers(result.Leaderboard);
+            if (result == null) return;
+
+            this.leaderboard = result.Leaderboard;
+
+            foreach (PlayerLeaderboardEntry playerScore in leaderboard)
+            {
+                string text = playerScore.DisplayName + " - " + playerScore.StatValue;
+                Debug.Log(text);
+            }
+
+            UITopPlayers.instance.ShowTopPlayers(leaderboard);
         }
 
 

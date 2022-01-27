@@ -26,6 +26,7 @@ namespace PlayFabDemo
 
             PlayFabLeaderBoard.instance.GetScore();
             PlayFabLeaderBoard.instance.GetLeaderBoard();
+            PlayFabInventory.instance.GetInventory();
         }
 
         public virtual void ScoreAdd(int addScore)
