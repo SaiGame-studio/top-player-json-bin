@@ -27,7 +27,7 @@ namespace PlayFabDemo
             Vector2 randomPositionOnScreen = Camera.main.ViewportToWorldPoint(new Vector2(Random.value, Random.value));
             transform.position = randomPositionOnScreen;
             GameManager.instance.ScoreAdd(this.score);
+            PlayFabInventory.instance.AddSeed(this.score);
         }
     }
-
 }
