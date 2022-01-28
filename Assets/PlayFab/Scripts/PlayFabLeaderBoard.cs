@@ -33,11 +33,11 @@ namespace PlayFabDemo
 
             this.leaderboard = result.Leaderboard;
 
-            foreach (PlayerLeaderboardEntry playerScore in leaderboard)
-            {
-                string text = playerScore.DisplayName + " - " + playerScore.StatValue;
-                Debug.Log(text);
-            }
+            //foreach (PlayerLeaderboardEntry playerScore in leaderboard)
+            //{
+            //    string text = playerScore.DisplayName + " - " + playerScore.StatValue;
+            //    Debug.Log(text);
+            //}
 
             UITopPlayers.instance.ShowTopPlayers(leaderboard);
         }
