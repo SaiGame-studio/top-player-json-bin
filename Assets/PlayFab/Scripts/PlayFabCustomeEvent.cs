@@ -29,6 +29,7 @@ namespace PlayFabDemo
         {
             Debug.Log("EventId: " + result.EventId);
             PlayFabInventory.instance.LazyLoadInventory();
+            PlayFabLeaderBoard.instance.LazyLoadTopEater();
         }
 
         protected virtual void RegisterError(PlayFabError error)

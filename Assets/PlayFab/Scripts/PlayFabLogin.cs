@@ -12,8 +12,8 @@ namespace PlayFabDemo
 
         private void Start()
         {
-            this.username.text = "simonsai";
-            this.password.text = "123qweasd";
+            //this.username.text = "simonsai";
+            //this.password.text = "123qweasd";
         }
 
         public virtual void Login()
@@ -32,7 +32,7 @@ namespace PlayFabDemo
             Debug.Log("LoginSuccess");
             Debug.Log("PlayFabId:" + result.PlayFabId);
             Debug.Log("SessionTicket:" + result.SessionTicket);
-            GameManager.instance.GameStart();
+            GameManager.instance.GameStart(this.username.text, result.PlayFabId);
         }
 
         protected virtual void RegisterError(PlayFabError error)
