@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/JsonBin/Scenes/main.unity
-    guid: 4069fce22365f09479a2a94fb95cbc04
+    path: Assets/PlayFab/Scenes/main.unity
+    guid: e2ec51f6fbfd32944b3a9ef0a8d04a42
   m_configObjects: {}

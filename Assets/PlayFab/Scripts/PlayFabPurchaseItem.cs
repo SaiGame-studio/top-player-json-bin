@@ -14,7 +14,7 @@ namespace PlayFabDemo
             PlayFabPurchaseItem.instance = this;
         }
 
-        public virtual void Purchase(string itemId, int price, string currency = "SE")
+        public void Purchase(string itemId, int price, string currency = "SE")
         {
             PurchaseItemRequest request = new PurchaseItemRequest
             {
