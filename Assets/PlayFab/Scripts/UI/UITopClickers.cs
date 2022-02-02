@@ -6,15 +6,15 @@ using UnityEngine;
 
 namespace PlayFabDemo
 {
-    public class UITopPlayers : MonoBehaviour
+    public class UITopClickers : MonoBehaviour
     {
-        public static UITopPlayers instance;
+        public static UITopClickers instance;
         public List<TextMeshProUGUI> textPlayerScores = new List<TextMeshProUGUI>();
 
         private void Awake()
         {
-            if (UITopPlayers.instance != null) Debug.LogError("UITopPlayers Error");
-            UITopPlayers.instance = this;
+            if (UITopClickers.instance != null) Debug.LogError("UITopClickers Error");
+            UITopClickers.instance = this;
 
             this.LoadTexts();
         }

@@ -22,15 +22,20 @@ namespace PlayFabDemo
             PlayFabClientAPI.GetUserInventory(request, this.OnGetInventorySuccess, this.RequestError);
         }
 
+        public virtual void LazyLoadInventory()
+        {
+            Invoke("GetInventory", 1f);
+        }
+
         protected virtual void OnGetInventorySuccess(GetUserInventoryResult result)
         {
             this.seed = result.VirtualCurrency["SE"];
             UISeed.instance.Show(this.seed);
 
             this.invetory = result.Inventory;
-            foreach(ItemInstance item in this.invetory)
+            foreach (ItemInstance item in this.invetory)
             {
-                UIInventory.instance.Show(item.ItemId, (int) item.RemainingUses);
+                UIInventory.instance.Show(item.ItemId, (int)item.RemainingUses);
             }
         }
 
@@ -54,6 +59,23 @@ namespace PlayFabDemo
         {
             this.seed = result.Balance;
             UISeed.instance.Show(this.seed);
+        }
+
+        public virtual ItemInstance FindById(string itemId)
+        {
+            return this.invetory.Find((item) => item.ItemId == itemId);
+        }
+
+        public virtual void LocalDeduct(string itemId, int number = 1)
+        {
+            ItemInstance itemInstance = this.FindById(itemId);
+            if(itemInstance == null)
+            {
+                Debug.LogWarning("Item not found: " + itemId);
+                return;
+            }
+            itemInstance.RemainingUses -= number;
+            UIInventory.instance.Show(itemInstance.ItemId, (int)itemInstance.RemainingUses);
         }
     }
 }

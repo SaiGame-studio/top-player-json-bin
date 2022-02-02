@@ -13,9 +13,9 @@ namespace PlayFabDemo
 
         private void Start()
         {
-            this.email.text = "tranminhduc18116@gmail.com";
-            this.username.text = "simonsai";
-            this.password.text = "1234567";
+            //this.email.text = "tranminhduc18116@gmail.com";
+            //this.username.text = "simonsai";
+            //this.password.text = "1234567";
         }
 
         public virtual void SignUp()

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace PlayFabDemo
 {
+
     public class UIPurchase : MonoBehaviour
     {
         public int price;
