@@ -12,8 +12,8 @@ namespace PlayFabDemo
 
         private void Start()
         {
-            //this.username.text = "simonsai";
-            //this.password.text = "123qweasd";
+            this.username.text = "simonsai";
+            this.password.text = "123qweasd";
         }
 
         public virtual void Login()

@@ -101,6 +101,7 @@ namespace PlayFabDemo
             string playFabId = GameManager.instance.playFabId;
             PlayerLeaderboardEntry player = this.topEaters.Find((p) => p.PlayFabId == playFabId);
             GameManager.instance.ShowBites(player.StatValue);
+            //TODO: has bug when more then 7 players
         }
 
         public virtual void LazyLoadTopEater()
